@@ -3,7 +3,6 @@ on:
  push:
    tags:
      - 'v*'
-
 jobs:
   build:
     name: Creating Github Releases and publishing them
@@ -11,10 +10,10 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
-     with:
+    with:
        fetch-depth:'0'
-    - name: push tag
-      uses: anothrNick/github-tag-action@1.17.2
+    - name: pushing tag
+       uses: anothrNick/github-tag-action@1.17.2
     - name: Creating Github Releases and publishing them
       uses: elgohr/Github-Release-Action@v4
       env:
