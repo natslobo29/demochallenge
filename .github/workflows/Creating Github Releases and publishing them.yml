@@ -1,0 +1,33 @@
+name: Creating Github Releases and publishing them
+on:
+ push:
+   tags:
+     - 'v*'
+
+jobs:
+  build:
+    name: Creating Github Releases and publishing them
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+     with:
+       fetch-depth:'0'
+    - name: push tag
+      uses: anothrNick/github-tag-action@1.17.2
+    - name: Creating Github Releases and publishing them
+      uses: elgohr/Github-Release-Action@v4
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      with:
+         title: MyReleaseMessage
+         tag_name: $${{ github.ref }}
+         release_name: Release ${{ github.ref }}
+         body:
+           changes in this release
+           - First change
+           - Second change
+          draft: false
+          prerelease: false
+          
+#Please note, that you can't use ${{ secrets.GITHUB_TOKEN }} as it isn't allowed to publish releases. 
