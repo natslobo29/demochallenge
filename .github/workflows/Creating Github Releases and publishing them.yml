@@ -1,6 +1,8 @@
 name: Creating Github Releases and publishing them
 on:
  push:
+   branches:
+     - main
    tags:
      - 'v*'
 jobs:
